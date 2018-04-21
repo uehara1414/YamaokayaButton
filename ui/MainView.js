@@ -8,7 +8,7 @@ const StatusBar = require('./StatusBar');
 const AddModal = require('./AddModal');
 const JoinModal = require('./JoinModal');
 
-firebase = require('./firebase');
+firebase = require('../firebase');
 
 function storeHighScore() {
   firebase.database().ref('yamaokaya-dev/' + 'testList').push({

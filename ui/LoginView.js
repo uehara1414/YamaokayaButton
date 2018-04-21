@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import ReactNative from 'react-native';
 
 const { View, TouchableHighlight, Text, Button } = ReactNative;
-const secrets =  require('./secrets.json');
+const secrets =  require('../secrets.json');
 
 class LoginView extends Component {
   render() {

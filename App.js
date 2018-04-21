@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import { StyleSheet, Text, View, Button, FlatList, ListView } from 'react-native';
 
-const MainView = require('./MainView');
-const LoginView = require('./LoginView');
+const MainView = require('./ui/MainView');
+const LoginView = require('./ui/LoginView');
 
 
 firebase = require('./firebase');
