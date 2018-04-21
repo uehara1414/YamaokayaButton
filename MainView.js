@@ -5,6 +5,7 @@ const { View, TouchableHighlight, Text, Button, ListView } = ReactNative;
 
 const ListItem = require('./ListItem');
 const StatusBar = require('./StatusBar');
+const AddModal = require('./AddModal');
 
 firebase = require('./firebase');
 
@@ -21,7 +22,8 @@ class MainView extends Component {
     this.state = {
       dataSource: new ListView.DataSource({
         rowHasChanged: (row1, row2) => row1 !== row2,
-      })
+      }),
+      addModalVisible: false,
     };
   }
 
@@ -53,17 +55,27 @@ class MainView extends Component {
     });
   }
 
+  addRecruit() {
+    this.setState({
+      addModalVisible: false,
+    })
+  }
+
   render() {
     return (
       <View>
         <StatusBar title="Grocery List" />
-        <Button
-          onPress={storeHighScore}
-          title="Learn More2"
-          color="#841584"
-          accessibilityLabel="Learn more about this purple button"
-        />
         <ListView dataSource={this.state.dataSource} renderRow={this._renderItem.bind(this)} />
+        <Button
+          onPress={() => {this.setState({addModalVisible: true})}}
+          title="募集をかける"
+          color="#841584"
+          accessibilityLabel="Recruit"
+        />
+        <AddModal
+          visible={this.state.addModalVisible}
+          onPress={() => {this.addRecruit()}}
+        />
       </View>
     );
   }
