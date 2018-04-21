@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, Button, FlatList } from 'react-native';
-import { Container, Header, Left, Body, Right, Title } from 'native-base';
+// import { StyleSheet, Text, View, Button, FlatList } from 'react-native';
+import { Container, Content, List, ListItem, Text, Left, Body, Right, Title, Icon, Switch } from 'native-base';
+import { Header } from './components/Header'
 
 import * as firebase from 'firebase';
 
@@ -20,26 +21,31 @@ export default class App extends React.Component {
   render() {
     return (
       <Container>
-        <Header>
-          <Left />
-          <Body>
-            <Title>Header</Title>
-          </Body>
-          <Right />
-        </Header>
-      </Container>
+        <Header></Header>
+
+      </Container >
     );
   }
 
 }
 
 /*
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+ <Content>
+          <List>
+            <ListItem icon>
+              <Left>
+                <Icon name="plane" />
+              </Left>
+              <Body>
+                <Text>Airplane Mode</Text>
+              </Body>
+              <Right>
+                <Switch value={false} />
+              </Right>
+            </ListItem>
+            <ListItem >
+              <Text>Aaron Bennet</Text>
+            </ListItem>
+          </List>
+        </Content>
 */
