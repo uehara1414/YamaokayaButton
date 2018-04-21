@@ -1,15 +1,7 @@
 import React, {Component} from 'react';
-import {Modal, Text, TouchableHighlight, View} from 'react-native';
+import {Modal, Text, Button, View} from 'react-native';
 
 class JoinModal extends Component {
-  state = {
-    modalVisible: false,
-  };
-
-  setModalVisible(visible) {
-    this.setState({modalVisible: visible});
-  }
-
   render() {
     return (
       <View style={{marginTop: 22}}>
@@ -24,12 +16,12 @@ class JoinModal extends Component {
             <View>
               <Text>参加する！！！</Text>
 
-              <TouchableHighlight
+              <Button
+                title="参加"
                 onPress={() => {
                   this.props.onPress()
                 }}>
-                <Text>Hide Modal</Text>
-              </TouchableHighlight>
+              </Button>
             </View>
           </View>
         </Modal>
