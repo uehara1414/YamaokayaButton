@@ -7,13 +7,6 @@ const LoginView = require('./LoginView');
 
 firebase = require('./firebase');
 
-let user = {
-  'authenticated': false,
-  'uid': null,
-  'displayName': ''
-};
-
-
 export default class App extends React.Component {
 
   constructor(props) {
@@ -34,6 +27,7 @@ export default class App extends React.Component {
 
   listenForItems(itemsRef) {
     that = this;
+
     // 認証時のコールバック
     firebase.auth().onAuthStateChanged(user => {
       if (user != null) {
@@ -45,13 +39,11 @@ export default class App extends React.Component {
           }
         });
       }
-      console.log('through');
     });
 
   }
 
   render() {
-    console.log(user.authenticated);
     return (
       <View>
         {this.state.user.authenticated ?
