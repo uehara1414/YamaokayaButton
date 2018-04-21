@@ -6,6 +6,7 @@ const { View, TouchableHighlight, Text, Button, ListView } = ReactNative;
 const ListItem = require('./ListItem');
 const StatusBar = require('./StatusBar');
 const AddModal = require('./AddModal');
+const JoinModal = require('./JoinModal');
 
 firebase = require('./firebase');
 
@@ -24,6 +25,7 @@ class MainView extends Component {
         rowHasChanged: (row1, row2) => row1 !== row2,
       }),
       addModalVisible: false,
+      joinModalVisible: false,
     };
   }
 
@@ -33,7 +35,7 @@ class MainView extends Component {
 
   _renderItem(item) {
     return (
-      <ListItem item={item} />
+      <ListItem item={item} onPress={() => {this.setState({joinModalVisible: true})}} />
     );
   }
 
@@ -61,11 +63,22 @@ class MainView extends Component {
     })
   }
 
+  join() {
+    this.setState({
+      joinModalVisible: false,
+    })
+  }
+
   render() {
     return (
       <View>
         <StatusBar title="Grocery List" />
-        <ListView dataSource={this.state.dataSource} renderRow={this._renderItem.bind(this)} />
+
+        <ListView
+          dataSource={this.state.dataSource}
+          renderRow={this._renderItem.bind(this)}
+        />
+
         <Button
           onPress={() => {this.setState({addModalVisible: true})}}
           title="募集をかける"
@@ -75,6 +88,10 @@ class MainView extends Component {
         <AddModal
           visible={this.state.addModalVisible}
           onPress={() => {this.addRecruit()}}
+        />
+        <JoinModal
+          visible={this.state.joinModalVisible}
+          onPress={() => {this.join()}}
         />
       </View>
     );
