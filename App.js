@@ -1,35 +1,67 @@
 import React, {Component} from 'react';
-import { StyleSheet, Text, View, Button } from 'react-native';
+import { StyleSheet, Text, View, Button, FlatList, ListView } from 'react-native';
 
-import * as firebase from 'firebase';
+const MainView = require('./MainView');
+const LoginView = require('./LoginView');
 
-// Initialize Firebase
-import firebaseConfig from "./firebaseConfig";
 
-firebase.initializeApp(firebaseConfig);
+firebase = require('./firebase');
 
-function storeHighScore() {
-  firebase.database().ref('yamaokaya-dev/' + 'testList').push({
-    comment: 'こめんとぉ' + Math.random().toString()
-  });
+let user = {
+  'authenticated': false,
+  'uid': null,
+  'displayName': ''
+};
 
-}
 
 export default class App extends React.Component {
-  render() {
-    return (
-      <View style={styles.container}>
-        <Text>OISHII RAMEN FOUND!</Text>
-        <Button
-          onPress={storeHighScore}
-          title="募集をかける"
-          color="#841584"
-          accessibilityLabel="募集する"
-        />
-      </View>
-    );
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      user: {
+        authenticated: true,
+        uid: null,
+        displayName: 'Anonymous'
+      }
+    }
   }
 
+  componentDidMount() {
+    this.listenForItems(this.itemsRef);
+  }
+
+  listenForItems(itemsRef) {
+    that = this;
+    // 認証時のコールバック
+    firebase.auth().onAuthStateChanged(user => {
+      if (user != null) {
+        that.setState({
+          user: {
+            authenticated: true,
+            uid: user.uid,
+            displayName: user.displayName,
+          }
+        });
+      }
+      console.log('through');
+    });
+
+  }
+
+  render() {
+    console.log(user.authenticated);
+    return (
+      <View>
+        {this.state.user.authenticated ?
+          <MainView/>
+          :
+          <LoginView />
+        }
+      </View>
+      );
+    }
 }
 
 const styles = StyleSheet.create({
