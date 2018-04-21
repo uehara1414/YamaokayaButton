@@ -1,9 +1,18 @@
 # YamaokayaButton
 
 ## 開発
+
+### 設定ファイルのコピー
+firebaseConfig.template.js を firebaseConfig.js という名前でコピーして apiKey などを書き直してください
+
+### npm
+```sh
+npm install
+```
+
+### expo
 ```sh
 npm install -g exp
-npm install
 exp start # 開発用ビルドの開始
 ```
 
