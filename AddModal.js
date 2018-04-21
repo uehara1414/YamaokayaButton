@@ -1,15 +1,7 @@
 import React, {Component} from 'react';
-import {Modal, Text, TouchableHighlight, View} from 'react-native';
+import {Modal, Text, Button, View} from 'react-native';
 
 class AddModal extends Component {
-  state = {
-    modalVisible: false,
-  };
-
-  setModalVisible(visible) {
-    this.setState({modalVisible: visible});
-  }
-
   render() {
     return (
       <View style={{marginTop: 22}}>
@@ -21,16 +13,19 @@ class AddModal extends Component {
             alert('Modal has been closed.');
           }}>
           <View style={{marginTop: 22}}>
-            <View>
-              <Text>Hello World!</Text>
+              <Text>募集するよ</Text>
 
-              <TouchableHighlight
+              <Text>色々な項目</Text>
+              <Text>色々な項目</Text>
+              <Text>色々な項目</Text>
+
+              <Button
+                title="募集をかける"
                 onPress={() => {
                   this.props.onPress()
                 }}>
-                <Text>Hide Modal</Text>
-              </TouchableHighlight>
-            </View>
+              </Button>
+
           </View>
         </Modal>
       </View>
