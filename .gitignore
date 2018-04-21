@@ -2,5 +2,7 @@ node_modules/**/*
 .expo/*
 npm-debug.*
 
+firebaseConfig.js
+
 # WebStorm
 .idea/
