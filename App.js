@@ -1,5 +1,6 @@
-import React, {Component} from 'react';
-import { StyleSheet, Text, View, Button } from 'react-native';
+import React, { Component } from 'react';
+import { StyleSheet, Text, View, Button, FlatList } from 'react-native';
+import { Container, Header, Left, Body, Right, Title } from 'native-base';
 
 import * as firebase from 'firebase';
 
@@ -18,20 +19,21 @@ function storeHighScore() {
 export default class App extends React.Component {
   render() {
     return (
-      <View style={styles.container}>
-        <Text>OISHII RAMEN FOUND!</Text>
-        <Button
-          onPress={storeHighScore}
-          title="募集をかける"
-          color="#841584"
-          accessibilityLabel="募集する"
-        />
-      </View>
+      <Container>
+        <Header>
+          <Left />
+          <Body>
+            <Title>Header</Title>
+          </Body>
+          <Right />
+        </Header>
+      </Container>
     );
   }
 
 }
 
+/*
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -40,3 +42,4 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 });
+*/
