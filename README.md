@@ -4,6 +4,7 @@
 
 ### 設定ファイルのコピー
 firebaseConfig.template.js を firebaseConfig.js という名前でコピーして apiKey などを書き直してください
+secrets.template.js を secrets.js という名前でコピーして FACEBOOK_APP_ID などを書き直してください
 
 ### npm
 ```sh

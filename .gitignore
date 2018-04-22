@@ -3,6 +3,8 @@ node_modules/**/*
 npm-debug.*
 
 firebaseConfig.js
+secrets.json
+settings.json
 
 # WebStorm
 .idea/
