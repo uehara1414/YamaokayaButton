@@ -4,7 +4,7 @@ import { Animated, Modal, Text, TextInput, Picker, Button, View, StyleSheet, Tou
 class AddModal extends Component {
   constructor(props) {
     super(props);
-    this.state = { comment: '', shop: '', time: '', comment: '' };
+    this.state = { shop: '', time: '', comment: '' };
   }
   render() {
     return (

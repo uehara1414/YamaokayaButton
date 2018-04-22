@@ -1,10 +1,14 @@
-import React, {Component} from 'react';
-import {Modal, Text, Button, View} from 'react-native';
+import React, { Component } from 'react';
+import { Modal, Text, TextInput, Button, View } from 'react-native';
 
 class JoinModal extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { comment: '' };
+  }
   render() {
     return (
-      <View style={{marginTop: 22}}>
+      <View style={{ marginTop: 22 }}>
         <Modal
           animationType="slide"
           transparent={false}
@@ -12,9 +16,14 @@ class JoinModal extends Component {
           onRequestClose={() => {
             alert('Modal has been closed.');
           }}>
-          <View style={{marginTop: 22}}>
+          <View style={{ marginTop: 22 }}>
             <View>
-              <Text>参加する！！！</Text>
+              <TextInput
+                style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
+                onChangeText={(text) => this.setState({ comment })}
+                value={this.state.comment}
+                placeholder='コメントを入力して下さい（任意）'
+              />
 
               <Button
                 title="参加"
