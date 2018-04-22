@@ -17,6 +17,17 @@ class AddModal extends Component {
             alert('Modal has been closed.');
           }}>
           <View style={{ marginTop: 22 }}>
+            <Button
+              title="戻る"
+              /*
+              style={{
+                textAlign: 'left'
+              }}
+              */
+              onPress={() => {
+                this.props.onPress()
+              }}>
+            </Button>
             <Text>募集するよ</Text>
 
             <TextInput

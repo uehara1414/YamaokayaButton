@@ -17,11 +17,21 @@ class JoinModal extends Component {
             alert('Modal has been closed.');
           }}>
           <View style={{ marginTop: 22 }}>
+            <Button
+              title="戻る"
+              /*
+              style={{
+                textAlign: 'left'
+              }}
+              */
+              onPress={() => {
+                this.props.onPress()
+              }}>
+            </Button>
             <View>
               <TextInput
                 style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
-                onChangeText={(text) => this.setState({ comment })}
-                value={this.state.comment}
+                onChangeText={(comment) => this.setState({ comment })}
                 placeholder='コメントを入力して下さい（任意）'
               />
 
