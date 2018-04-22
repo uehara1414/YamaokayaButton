@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import ReactNative from 'react-native';
 
 const { View, TouchableHighlight, Text, Button, ListView } = ReactNative;
+const SETTINGS = require('../settings.json');
 
 const ListItem = require('./ListItem');
 const StatusBar = require('./StatusBar');
