@@ -61,7 +61,25 @@ class MainView extends Component {
   addRecruit() {
     this.setState({
       addModalVisible: false,
+    });
+
+    this.props.users.forEach((item) => {
+
+      fetch("https://exp.host/--/api/v2/push/send", {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          to: item.ExponentPushToken,
+          body: item.displayName + 'さんが山岡家に行こうとしています',
+          data: {"a": "b"}
+        }),
+      });
+
     })
+
   }
 
   join() {

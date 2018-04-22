@@ -1,9 +1,12 @@
 import React, {Component} from 'react';
 import { StyleSheet, Text, View, Button, FlatList, ListView } from 'react-native';
+import { Permissions, Notifications } from 'expo';
 
 const MainView = require('./ui/MainView');
 const LoginView = require('./ui/LoginView');
+const registerForPushNotificationsAsync = require('./notifications');
 
+const SETTINGS = require('./settings.json');
 
 firebase = require('./firebase');
 
@@ -12,18 +15,55 @@ export default class App extends React.Component {
   constructor(props) {
     super(props);
 
+    this.userRef = firebase.database().ref(SETTINGS.FIREBASE_DB_PREFIX + 'users/');
+
     this.state = {
       user: {
-        authenticated: true,
+        authenticated: false,
         uid: null,
         displayName: 'Anonymous'
-      }
+      },
+      users: [],
     }
+  }
+
+  setExponentPushToken(uid, token) {
+    let ref = firebase.database().ref(SETTINGS.FIREBASE_DB_PREFIX + 'users/' + uid);
+    ref.update({
+      'ExponentPushToken': token
+    });
+  }
+
+  listenForUsers(usersRef) {
+    usersRef.on('value', (snap) => {
+
+      // get children as an array
+      var items = [];
+      snap.forEach((child) => {
+        items.push({
+          uid: child.val().uid,
+          displayName: child.val().displayName,
+          ExponentPushToken: child.val().ExponentPushToken
+        });
+      });
+
+      this.setState({
+        users: items
+      });
+
+    });
   }
 
   componentDidMount() {
     this.listenForItems(this.itemsRef);
+    this.listenForUsers(this.userRef);
+    this.listeners = Notifications.addListener(this.onPushNotification);
   }
+
+  onPushNotification (notifications) {
+    console.log(notifications);
+  }
+
 
   listenForItems(itemsRef) {
     that = this;
@@ -38,6 +78,16 @@ export default class App extends React.Component {
             displayName: user.displayName,
           }
         });
+
+        let ref = firebase.database().ref(SETTINGS.FIREBASE_DB_PREFIX + 'users/' + user.uid);
+        ref.update({
+          'displayName': user.displayName
+        });
+
+        registerForPushNotificationsAsync((token) => {
+          that.setExponentPushToken(user.uid, token);
+        });
+
       }
     });
 
@@ -47,7 +97,9 @@ export default class App extends React.Component {
     return (
       <View>
         {this.state.user.authenticated ?
-          <MainView/>
+          <MainView
+            users={this.state.users}
+          />
           :
           <LoginView />
         }
