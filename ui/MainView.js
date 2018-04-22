@@ -12,7 +12,7 @@ const JoinModal = require('./JoinModal');
 firebase = require('../firebase');
 
 function storeHighScore() {
-  firebase.database().ref('yamaokaya-dev/' + 'testList').push({
+  firebase.database().ref(SETTINGS.FIREBASE_DB_PREFIX + 'testList').push({
     comment: 'こめんとぉ' + Math.random().toString()
   });
 }
@@ -20,7 +20,7 @@ function storeHighScore() {
 class MainView extends Component {
   constructor(props) {
     super(props);
-    this.itemsRef = firebase.database().ref('yamaokaya-dev/testList');
+    this.itemsRef = firebase.database().ref(SETTINGS.FIREBASE_DB_PREFIX + 'testList');
     this.state = {
       dataSource: new ListView.DataSource({
         rowHasChanged: (row1, row2) => row1 !== row2,
